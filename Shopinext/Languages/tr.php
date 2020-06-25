@@ -7,6 +7,8 @@
  * @author WebSite: https://mirarus.com/
 */
 
+$Pl_lang['payment_error'] = 'Ödeme Hatası!';
+$Pl_lang['please_check_the_form_and_try_again'] = 'Lütfen formu kontrol edip tekrar deneyin.';
 $Pl_lang['name_surname_on_card'] = 'Kart Üzerindeki Ad Soyad';
 $Pl_lang['card_number'] = 'Kart Numarası';
 $Pl_lang['month'] = 'Ay';

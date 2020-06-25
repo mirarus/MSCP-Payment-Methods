@@ -85,10 +85,17 @@ class Shopinext extends PaymentPlugin
 		$result = json_decode(curl_exec($ch), true);
 		if (curl_errno($ch)) die("Bağlantı hatası. err:" . curl_error($ch));
 		curl_close($ch);
-		if (!isset($result['sessionToken'])) echo $result['errorMsg'];
+		if (!isset($result['sessionToken'])) $error_message = $result['errorMsg'];
 		Session::set([md5(__CLASS__) => [md5('invoice_id') => $params['invoice_id']]]);
 		?>
 		<form class="pl-5 pr-5 pt-4 pb-4" action="https://www.shopinext.com/sale3d/<?php echo $result['sessionToken']; ?>" method="post" novalidate="novalidate">
+			<?php if (@$error_message) {
+				echo '<div class="row">';
+				self::__('payment_error');
+				echo '<b>' . $error_message . '</b><br>';
+				self::__('please_check_the_form_and_try_again');
+				echo '</div>';
+			} ?>
 			<div class="form-group">
 				<label class="text-muted pb-2"><?php self::__('name_surname_on_card'); ?></label>
 				<input type="text" class="form-control text-center" name="name" autocomplete="cc-name" maxlength="32" required>
