@@ -90,29 +90,29 @@ class Shopinext extends PaymentPlugin
 		?>
 		<form class="pl-5 pr-5 pt-4 pb-4" action="https://www.shopinext.com/sale3d/<?php echo $result['sessionToken']; ?>" method="post" novalidate="novalidate">
 			<div class="form-group">
-				<label class="text-muted pb-2">Kart Üzerindeki Ad Soyad</label>
+				<label class="text-muted pb-2"><?php self::__('name_surname_on_card'); ?></label>
 				<input type="text" class="form-control text-center" name="name" autocomplete="cc-name" maxlength="32" required>
 			</div>
 			<div class="form-group">
-				<label class="text-muted pb-2">Kart Numarası</label>
+				<label class="text-muted pb-2"><?php self::__('card_number'); ?></label>
 				<input type="tel" class="form-control text-center" name="number" placeholder="•••• •••• •••• ••••" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" minlength="19" maxlength="19" required>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-4 col-4">
-					<label class="text-muted pb-2">Ay</label>
+					<label class="text-muted pb-2"><?php self::__('month'); ?></label>
 					<input type="number" class="form-control text-center" name="month" placeholder="••" autocomplete="cc-exp-month" minlength="2" maxlength="2" required>
 				</div>
 				<div class="form-group col-md-4 col-4">
-					<label class="text-muted pb-2">Yıl</label>
+					<label class="text-muted pb-2"><?php self::__('year'); ?></label>
 					<input type="number" class="form-control text-center" name="year" placeholder="••••" autocomplete="cc-exp-year" minlength="4" maxlength="4" required>
 
 				</div>
 				<div class="form-group col-md-4 col-4">
-					<label class="text-muted pb-2">CVC</label>
+					<label class="text-muted pb-2"><?php self::__('cvv'); ?></label>
 					<input type="number" class="form-control text-center" name="cvv" placeholder="•••" autocomplete="cc-csc" minlength="3" maxlength="4" required>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-info btn-block">Öde</button>
+			<button type="submit" class="btn btn-info btn-block"><?php self::__('pay'); ?></button>
 		</form>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://www.shopinext.com/assets/js/jquery.mask.js"></script>
