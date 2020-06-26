@@ -143,21 +143,25 @@ class PayTR extends PaymentPlugin
 				$invoice_data = Model::include('customer', 'payment')->invoice_data($invoice_id[1]);
 				if ($invoice_data) {
 					if (checkPaymentTransID($invoice_id[0])) {
+						$log_status = "İsset BuyID";
 						echo "İsset BuyID";
 					} else{
 						$log_data = '[hash] => ' . $Phash . ' [merchant_oid] => ' . $merchant_oid . ' [status] => ' . $status . ' [total_amount] => ' . $total_amount . ' [payment_type] => ' . @form_filter('payment_type') . ' [payment_amount] => ' . @form_filter('payment_amount') . ' [currency] => ' . @form_filter('currency') . ' [installment_count] => ' . @form_filter('installment_count') . ' [merchant_id] => ' . @form_filter('merchant_id') . ' [test_mode] => ' . @form_filter('test_mode');
-						log_Module_Call('Paymanet', __CLASS__, 'callback', $log_data, $status);
 						$callback = Controller::include('customer', 'payment')->invoice_pay_callback($invoice_data['invoice_id']);
 						if ($callback['status'] == true) {
 							add_Transaction($invoice_data['invoice_user_id'], $invoice_data['invoice_id'], __CLASS__, $invoice_id[0], $invoice_data['invoice_amount'], "Invoice Payment");
+							$log_status = "OK";
 							echo "OK";
 						} else{
+							$log_status = $callback['message'];
 							echo $callback['message'];
 						}
 					}
 				} else{
+					$log_data = "Invoice ID Not Faund";
 					echo "Invoice ID Not Faund";
 				}
+				log_Module_Call('Paymanet', __CLASS__, 'callback', $log_data, $log_status);
 			}
 		}
 	}
